@@ -2,8 +2,9 @@ import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.naive_bayes import GaussianNB, MultinomialNB
+from sklearn.pipeline import Pipeline
 
-##Following this tutorial: http://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.html
+## SOURCE: http://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.html
 
 raw_data = 'combined_data.tsv'
 df = pd.read_csv(raw_data, encoding='utf-8', sep='\t')
@@ -30,3 +31,11 @@ predicted = clf.predict(X_new_tfidf)
 
 for doc, category in zip(docs_new, predicted):
     print('%r => %s' % (doc, category))
+
+text_clf = Pipeline([('vect', CountVectorizer()),
+                     ('tfidf', TfidfTransformer()),
+                     ('clf', MultinomialNB()), ])
+text_clf.fit(df.body, df.label)
+docs_test = df.body
+predicted = text_clf.predict(docs_test)
+print(np.mean(predicted == df.label))
