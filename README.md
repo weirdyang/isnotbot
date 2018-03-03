@@ -8,4 +8,5 @@ Following this tutorial: http://scikit-learn.org/stable/tutorial/text_analytics/
 # Training data from Pushshift
 
 Bot comments from r/subredditsimulator
+
 Human comments from r/beta and r/askhistorians
