@@ -20,6 +20,6 @@ def normalize(text):
 
 
 def cosine_sim(list_of_text):
-    vectorizer = TfidfVectorizer(tokenizer=normalize, stop_words='english')
+    vectorizer = TfidfVectorizer(tokenizer=normalize, stop_words=stop_words)
     tfidf = vectorizer.fit_transform(list_of_text)
     return ((tfidf * tfidf.T).A)[0, 1]
